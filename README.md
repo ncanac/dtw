@@ -9,6 +9,7 @@ python setup.py build_ext --inplace
 
 Computes the dynamic time warping (DTW) distance between two sequences.
 
+```
 Parameters
 ----------
 x : numpy array of floats
@@ -23,6 +24,7 @@ Returns
 -------
 float
     The DTW distance between x and y
+```
 
 ## Usage
 
