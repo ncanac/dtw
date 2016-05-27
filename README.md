@@ -28,14 +28,17 @@ float
 
 ## Usage
 
-```python
-import numpy as np
-from _dtw import dtw
+```
+In [1]: import numpy as np
 
-x = np.array([])
-y = np.array([])
+In [2]: from _dtw import dtw
 
-dtw_dist = dtw(x, y, 0.2)
+In [3]: x = np.array([3, 2, 2, 1, 3, 1, 1])
+
+In [4]: y = np.array([1, 1, 3, 2, 1, 2])
+
+In [5]: dtw(x, y, 0.5)
+Out[5]: 6.0
 ```
 
 Also refer to example in test_dtw.py
