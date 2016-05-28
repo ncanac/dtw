@@ -3,7 +3,11 @@ Dynamic time warping distance C extension for Python
 
 ## Installation
 
+To compile and link the source code in the current directory, type:
+
+```
 python setup.py build_ext --inplace
+```
 
 ## Description
 
