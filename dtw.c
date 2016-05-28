@@ -34,7 +34,7 @@ double dtw(double *x, double *y, int xsize, int ysize, double window_frac)
             maxj = ysize;
         for(j = minj; j < maxj; ++j)
         {
-            dist = sqrt(pow(x[i] - y[j], 2.0));
+            dist = fabs(x[i] - y[j]);
             min = distances[i][j];
             if(min > distances[i][j+1])
                 min = distances[i][j+1];
