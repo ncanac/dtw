@@ -16,6 +16,9 @@ double dtw(double *x, double *y, int xsize, int ysize, double window_frac)
         distances[i] = malloc((ysize + 1) * sizeof(double));
 
     window = window_frac*ysize;
+    if(xsize > ysize)
+        window = window_frac*xsize;
+
     if(window < min_window)
         window = min_window;
 
