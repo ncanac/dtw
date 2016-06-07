@@ -9,6 +9,45 @@ To compile and link the source code in the current directory, type:
 python setup.py build_ext --inplace
 ```
 
+If compilation is successful, you can run the small test script, which
+generates two arrays of random numbers and computes the DTW distance between
+them, first using a window constraint and then without one. The test script can
+be run zero, one, or two position arguments.
+
+```
+Zero
+----
+Generates two arrays with 10000 elements and a window size of 0.1. This takes
+about a second to run on my machine.
+
+Example
+    python test_dtw.py
+
+One
+---
+Takes one command line argument, which is the size of the arrays.
+
+Example
+    python test_dtw.py 10000
+
+Two
+---
+Takes two command line arguments. The first argument is the size of the arrays
+and the second argument is the window fraction.
+
+Example
+    python test_dtw.py 10000 0.1
+
+Example output
+--------------
+
+DTW distance with window=0.1: 1526.4299465
+Took 0.362146 seconds.
+
+DTW distance with no window: 1526.4299465
+Took 0.772507 seconds.
+```
+
 ## Description
 
 Computes the dynamic time warping (DTW) distance between two sequences.
@@ -21,8 +60,8 @@ x : numpy array of floats
 y : numpy array of floats
     Second sequence
 window_frac: float
-    Locality constraint, given as a fraction of the size of the size of the
-    second sequence.
+    Locality constraint, given as a fraction from 0 to 1 of the size of the
+    larger sequence.
 
 Returns
 -------
