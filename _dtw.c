@@ -6,9 +6,41 @@
 static char module_docstring[] =
     "This module provides an interface for calculating the DTW distance in C.";
 static char dtw_docstring[] =
-    "Calculate the DTW distance between two state sequences.";
+    "Compute the dynamic time warping (DTW) distance between two sequences.\n"
+    "\n"
+    "Parameters\n"
+    "----------\n"
+    "x : numpy array of floats\n"
+    "   First sequence\n"
+    "y : numpy array of floats\n"
+    "   Second sequence\n"
+    "window_frac: float\n"
+    "   Locality constraint, given as a fraction from 0 to 1 of the size of\n"
+    "   the larger sequence.\n"
+    "\n"
+    "Returns\n"
+    "-------\n"
+    "float\n"
+    "   The DTW distance between x and y";
 static char dtw_path_docstring[] =
-    "Determine the optimal warping  between two state sequences.";
+    "Determine the optimal warping between two sequences.\n"
+    "\n"
+    "Parameters\n"
+    "----------\n"
+    "x : numpy array of floats\n"
+    "   First sequence\n"
+    "y : numpy array of floats\n"
+    "   Second sequence\n"
+    "window_frac: float\n"
+    "   Locality constraint, given as a fraction from 0 to 1 of the size of\n"
+    "   the larger sequence.\n"
+    "\n"
+    "Returns\n"
+    "-------\n"
+    "numpy.ndarray\n"
+    "   The pairings between the two sequences that provide the optimal\n"
+    "   warping path.";
+
 
 /* Available functions */
 static PyObject *dtw_dtw(PyObject *self, PyObject *args);
@@ -109,20 +141,19 @@ static PyObject *dtw_dtw_path(PyObject *self, PyObject *args)
     double *y = (double*)PyArray_DATA(y_array);
 
     /* Call the external C function to compute the DTW distance. */
-    double value = dtw_path(x, y, xsize, ysize, window_frac);
+    int *path = dtw_path(x, y, xsize, ysize, window_frac);
 
     /* Clean up. */
     Py_DECREF(x_array);
     Py_DECREF(y_array);
 
-    if(value < 0.0)
-    {
-        PyErr_SetString(PyExc_RuntimeError,
-                    "dtw returned an impossible value.");
-        return NULL;
-    }
+    /* Copy to numpy array. */
+    int path_size = path[0];
+    npy_intp dims[2] = {path_size, 2};
 
-    /* Build the output tuple */
-    PyObject *ret = Py_BuildValue("d", value);
+    PyObject *ret = PyArray_SimpleNew(2, dims, NPY_INT);
+    memcpy(PyArray_DATA(ret), &path[1], (path_size)*sizeof(int)*2);
+    free(path);
+
     return ret;
 }
