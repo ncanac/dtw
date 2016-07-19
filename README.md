@@ -1,5 +1,5 @@
 # dtw
-Dynamic time warping distance C extension for Python
+Dynamic time warping (DTW) distance C extension for Python
 
 ## Installation
 

@@ -4,7 +4,7 @@
 
 /* Docstrings */
 static char module_docstring[] =
-    "This module provides an interface for calculating the DTW distance in C.";
+    "Dynamic time warping (DTW) distance C extension for Python";
 static char dtw_docstring[] =
     "Compute the dynamic time warping (DTW) distance between two sequences.\n"
     "\n"
