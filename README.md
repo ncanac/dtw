@@ -17,6 +17,8 @@ or just execute the compilation script:
 
 which will also run the test script.
 
+## Testing
+
 If compilation is successful, you can manually run the test script, which
 generates two arrays of random numbers and computes the DTW distance and path
 between them, first using a window constraint and then without one. The test
@@ -42,8 +44,13 @@ Two
 ---
 Takes two command line arguments. The first argument is the size of the arrays
 and the second argument is the window fraction.
+```
 
-Example
+The test script test_dtw.py can be run as follows:
+
+```
+Example input
+-------------
     python test_dtw.py 10000 0.1
 
 Example output
